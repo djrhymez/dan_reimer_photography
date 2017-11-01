@@ -1,0 +1,2 @@
+class ProductTextTag < ApplicationRecord
+end

@@ -1,0 +1,2 @@
+class TextTag < ApplicationRecord
+end
