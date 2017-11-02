@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171102020755) do
+ActiveRecord::Schema.define(version: 20171102143001) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -62,12 +62,18 @@ ActiveRecord::Schema.define(version: 20171102020755) do
     t.float "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "order_id"
+    t.integer "product_id"
+    t.index ["order_id"], name: "index_line_items_on_order_id"
+    t.index ["product_id"], name: "index_line_items_on_product_id"
   end
 
   create_table "orders", force: :cascade do |t|
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "client_id"
+    t.index ["client_id"], name: "index_orders_on_client_id"
   end
 
   create_table "product_text_tags", force: :cascade do |t|
@@ -105,8 +111,8 @@ ActiveRecord::Schema.define(version: 20171102020755) do
   end
 
   create_table "wishlist_products", force: :cascade do |t|
-    t.integer "wishlist_ID"
-    t.integer "product_ID"
+    t.integer "wishlist_id"
+    t.integer "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -114,6 +120,8 @@ ActiveRecord::Schema.define(version: 20171102020755) do
   create_table "wishlists", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "client_id"
+    t.index ["client_id"], name: "index_wishlists_on_client_id"
   end
 
 end
