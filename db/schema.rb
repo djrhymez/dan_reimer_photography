@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171101135834) do
+ActiveRecord::Schema.define(version: 20171101234110) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -65,10 +65,12 @@ ActiveRecord::Schema.define(version: 20171101135834) do
   end
 
   create_table "product_text_tags", force: :cascade do |t|
-    t.integer "product_ID"
-    t.integer "text_tag_ID"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "product_id"
+    t.integer "text_tag_id"
+    t.index ["product_id"], name: "index_product_text_tags_on_product_id"
+    t.index ["text_tag_id"], name: "index_product_text_tags_on_text_tag_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -78,12 +80,16 @@ ActiveRecord::Schema.define(version: 20171101135834) do
     t.integer "stock_quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "product_text_tag_id"
+    t.index ["product_text_tag_id"], name: "index_products_on_product_text_tag_id"
   end
 
   create_table "text_tags", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "product_text_tag_id"
+    t.index ["product_text_tag_id"], name: "index_text_tags_on_product_text_tag_id"
   end
 
   create_table "wishlist_products", force: :cascade do |t|
