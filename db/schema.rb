@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171102005524) do
+ActiveRecord::Schema.define(version: 20171102013725) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -79,8 +79,18 @@ ActiveRecord::Schema.define(version: 20171102005524) do
     t.index ["text_tag_id"], name: "index_product_text_tags_on_text_tag_id"
   end
 
-# Could not dump table "products" because of following StandardError
-#   Unknown type 'reference' for column 'category'
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.float "price"
+    t.integer "stock_quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "product_text_tag_id"
+    t.integer "category_id"
+    t.index ["category_id"], name: "index_products_on_category_id"
+    t.index ["product_text_tag_id"], name: "index_products_on_product_text_tag_id"
+  end
 
   create_table "text_tags", force: :cascade do |t|
     t.string "name"
