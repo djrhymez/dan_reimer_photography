@@ -1,0 +1,8 @@
+.productPanel
+  h1 = @product.name
+  .imagePanel
+    = image_tag(@product.image(:original), :alt => @product.name, :id => 'productImage')
+  h3 =@product.description
+  h2 =@product.category.name
+
+= link_to 'Back', index_url

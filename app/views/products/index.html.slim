@@ -1,0 +1,7 @@
+h1 Products
+
+.products
+  - @products.each do |prod|
+    == link_to product_url(prod) do
+      .imageDiv data-text=prod.name
+        = image_tag(prod.image(:large), :alt => prod.name)

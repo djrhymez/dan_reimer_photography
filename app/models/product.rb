@@ -4,8 +4,8 @@ class Product < ApplicationRecord
 
   has_many :product_text_tags
   belongs_to :category
-  belongs_to :line_item
-  has_many :wishlist_products
+  # belongs_to :line_item
+  # has_many :wishlist_products
 
   #Paperclip support
   has_attached_file :image, styles: { small: "64x64", med: "100x100", large: "200x200" }

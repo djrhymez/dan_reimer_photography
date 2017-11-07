@@ -1,0 +1,34 @@
+// Place all the styles related to the Product controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+body {
+  height: 100%;
+  width: 100%;
+}
+
+.productPanel {
+  background: #313131;
+  width: 100%;
+  height: inherit;
+  padding: 20px;
+}
+
+.imagePanel {
+  display: inline-block;
+}
+
+.detailsPanel {
+  position: relative;
+  left: 0;
+  background: #202020;
+  display: inline-block;
+}
+
+h3 {
+  color: black;
+}
+
+#productImage {
+  width: 450px;
+  height: auto;
+}
