@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
@@ -8,5 +9,6 @@ Rails.application.routes.draw do
   get 'product/updated', to: 'products#updated_products', as: 'recently_updated'
   get 'products/:id', to: 'products#product', as: 'product', number: /\d+/
 
+  root to: 'products#index', as: 'home'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
