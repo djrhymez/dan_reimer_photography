@@ -1,0 +1,13 @@
+- if @about_page.header != nil
+    h1 = @about_page.header
+- else
+    h1
+      About
+- end
+
+- if @about_page.message != nil
+    p = @about_page.message
+- else
+    p
+      Sorry, there is no content to display.
+- end
