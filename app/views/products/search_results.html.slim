@@ -1,0 +1,10 @@
+h1 Search Results for #{params[:search_keywords]}
+
+- if @products.size.zero?
+    p No products found.
+- else
+  .products
+    - @products.each do |prod|
+      == link_to product_url(prod) do
+        .imageDiv data-text=prod.name
+          = image_tag(prod.image(:large), :alt => prod.name)
