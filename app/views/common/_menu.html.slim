@@ -13,7 +13,9 @@ div
       li = link_to "Sign Up", new_user_registration_path
       li = link_to "Login", new_user_session_path
 
-div
-  = form_tag search_results_path, method: :get do
-    = text_field_tag :search_keywords
-    = submit_tag 'Search'
+- if @categories != nil
+  div
+    = form_tag search_results_path, method: :get do
+      = text_field_tag :search_keywords
+      = select_tag 'category', options_from_collection_for_select(@categories, "id", "name", "1"), :include_blank => true
+      = submit_tag 'Search'
