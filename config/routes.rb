@@ -10,8 +10,8 @@ Rails.application.routes.draw do
   get 'products/:id', to: 'products#product', as: 'product', number: /\d+/
   get 'contact', to: 'contacts#index', as: 'contact'
   get 'about', to: 'about_pages#index', as: 'about'
-
   get 'search_results', to: 'products#search_results', as: 'search_results'
+  get 'products_by_category/:category', to: 'products#products_by_category', as: 'products_by_category', number: /\d+/
 
   root to: 'products#index', as: 'home'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

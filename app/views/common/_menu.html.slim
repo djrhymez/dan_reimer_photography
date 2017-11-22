@@ -19,3 +19,8 @@ div
       = text_field_tag :search_keywords
       = select_tag 'category', options_from_collection_for_select(@categories, "id", "name", "1"), :include_blank => true
       = submit_tag 'Search'
+
+  div
+    ul
+      - @categories.each do |category|
+        = link_to category.name, products_by_category_url(category)
