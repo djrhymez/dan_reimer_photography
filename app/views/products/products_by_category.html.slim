@@ -5,3 +5,4 @@ h1 = @category
     == link_to product_url(prod) do
       .imageDiv data-text=prod.name
         = image_tag(prod.image(:large), :alt => prod.name)
+= paginate @products

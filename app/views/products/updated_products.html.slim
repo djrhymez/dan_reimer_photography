@@ -7,3 +7,4 @@ h1 Recently Updated Products
         = image_tag(prod.image(:large), :alt => prod.name)
   - if @updated_products.empty?
     h2 Sorry, there are no recently updated products to show at this time.
+= paginate @updated_products

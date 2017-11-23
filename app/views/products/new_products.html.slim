@@ -7,3 +7,4 @@ h1 New Products
         = image_tag(prod.image(:large), :alt => prod.name)
   - if @new_products.empty?
     h2 Sorry, there are no new products to show at this time.
+= paginate @new_products
