@@ -4,31 +4,10 @@
 body {
   height: 100%;
   width: 100%;
-}
 
-.productPanel {
-  background: #313131;
-  width: 100%;
-  height: inherit;
-  padding: 20px;
-}
 
-.imagePanel {
-  display: inline-block;
-}
-
-.detailsPanel {
-  position: relative;
-  left: 0;
-  background: #202020;
-  display: inline-block;
-}
-
-h3 {
-  color: black;
-}
-
-#productImage {
-  width: 450px;
-  height: auto;
+  #productImage {
+    width: 450px;
+    height: auto;
+  }
 }

@@ -12,6 +12,7 @@ div
     - else
       li = link_to "Sign Up", new_user_registration_path
       li = link_to "Login", new_user_session_path
+      li = link_to "Shopping Cart", shopping_cart_url
 
 - if @categories != nil
   div
@@ -23,4 +24,4 @@ div
   div
     ul
       - @categories.each do |category|
-        = link_to category.name, products_by_category_url(category)
+        li = link_to category.name, products_by_category_url(category)
