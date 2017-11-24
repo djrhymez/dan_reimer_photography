@@ -13,6 +13,10 @@ Rails.application.routes.draw do
   get 'search_results', to: 'products#search_results', as: 'search_results'
   get 'products_by_category/:category', to: 'products#products_by_category', as: 'products_by_category', number: /\d+/
   get 'shopping_cart', to: 'shopping_carts#index', as: 'shopping_cart'
+  post 'products/:id/add_to_cart', to: 'shopping_carts#add_to_cart', as: 'add_to_cart', number: /\d+/
+  post 'shopping_cart/remove_from_cart/:id', to: 'shopping_carts#remove_from_cart', as: 'remove_from_cart', number: /\d+/
+  post 'shopping_cart/increase_item_quantity/:id', to:'shopping_carts#increase_item_quantity', as: 'increase_item_quantity', number: /\d+/
+  post 'shopping_cart/decrease_item_quantity/:id', to:'shopping_carts#decrease_item_quantity', as: 'decrease_item_quantity', number: /\d+/
 
   root to: 'products#index', as: 'home'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

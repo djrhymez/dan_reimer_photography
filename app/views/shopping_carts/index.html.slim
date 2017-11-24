@@ -1,1 +1,11 @@
 h2 Cart
+table
+  - @products_in_cart.each do |product|
+    tr
+      td = product.name
+      td
+        | Quantity:
+        = product.quantity
+      td = link_to '+', increase_item_quantity_url(product.id), method: :post
+      td = link_to '-', decrease_item_quantity_url(product.id), method: :post
+      td = link_to 'x', remove_from_cart_url(product.id), method: :post
