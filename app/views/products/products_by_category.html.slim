@@ -2,3 +2,8 @@ h1 = @category
 .ui.four.column.centered.grid
   = render partial: 'product',
     collection: @products
+- if @products.empty?
+  .ui.four.column.centered.grid
+    .six.wide.column
+      |Sorry, there are no products to show at this time.
+= paginate @products

@@ -2,3 +2,4 @@ h1 Products
 .ui.four.column.centered.grid
   = render partial: 'product',
     collection: @products
+= paginate @products

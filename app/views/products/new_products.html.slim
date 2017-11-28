@@ -1,10 +1,10 @@
 h1 New Products
 
-.products
-  - @new_products.each do |prod|
-    == link_to product_url(prod) do
-      .imageDiv data-text=prod.name
-        = image_tag(prod.image(:large), :alt => prod.name)
-  - if @new_products.empty?
-    h2 Sorry, there are no new products to show at this time.
+.ui.four.column.centered.grid
+  = render partial: 'product',
+    collection: @new_products
+- if @new_products.empty?
+  .ui.four.column.centered.grid
+    .six.wide.column
+      |Sorry, there are no new products to show at this time.
 = paginate @new_products
