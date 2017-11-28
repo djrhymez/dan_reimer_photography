@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
 
   def initialize_session
     session[:shopping_cart] ||= {}
+    session[:cart_subtotal] ||= 0
   end
 
   def get_categories

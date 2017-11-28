@@ -1,13 +1,18 @@
 class ShoppingCartsController < ApplicationController
   def index
     @products_in_cart = Product.find(session[:shopping_cart].keys)
+    session[:cart_subtotal] = 0;
 
     @products_in_cart = []
 
     session[:shopping_cart].each do |product, quantity|
-      cart_item = CartItem.new(product, quantity)
+      price = Product.find(product).price
+      cart_item = CartItem.new(product, quantity, price)
+      session[:cart_subtotal] += cart_item.quantity * cart_item.price
       @products_in_cart << cart_item
     end
+
+    @cart_subtotal = session[:cart_subtotal]
   end
 
   def add_to_cart
@@ -39,12 +44,13 @@ class ShoppingCartsController < ApplicationController
   end
 
   class CartItem
-    attr_accessor :id, :quantity, :name
+    attr_accessor :id, :quantity, :name, :price
 
-    def initialize(id, quantity)
+    def initialize(id, quantity, price)
         @id = id
         @quantity = quantity
         @name = Product.find(id).name
+        @price = price
     end
 
   end

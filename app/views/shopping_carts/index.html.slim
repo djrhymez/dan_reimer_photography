@@ -1,11 +1,30 @@
 h2 Cart
-table
+h3
+  |Subtotal: $
+  = @cart_subtotal
+.ui.four.column.centered.grid
   - @products_in_cart.each do |product|
-    tr
-      td = product.name
-      td
-        | Quantity:
-        = product.quantity
-      td = link_to '+', increase_item_quantity_url(product.id), method: :post
-      td = link_to '-', decrease_item_quantity_url(product.id), method: :post
-      td = link_to 'x', remove_from_cart_url(product.id), method: :post
+    .four.wide.column
+      .ui.card
+        .content
+          .header
+            = product.name
+          .meta
+            span.date
+              |$
+              =product.price
+          .meta
+            span.date
+              |Quantity:
+              =product.quantity
+        .extra.content
+          .ui.two.buttons
+            .ui.basic.red.button
+              = link_to 'Decrease', decrease_item_quantity_url(product.id), method: :post
+            .ui.basic.green.button
+              = link_to 'Increase', increase_item_quantity_url(product.id), method: :post
+        .extra.content
+          .fluid.ui.button
+            = link_to 'Remove', remove_from_cart_url(product.id), method: :post
+.fluid.ui.button
+  = link_to 'Checkout', checkout_url
