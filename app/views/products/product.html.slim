@@ -1,10 +1,13 @@
-= debug session[:shopping_cart]
-.productPanel
-  h1 = @product.name
-  .imagePanel
-    = image_tag(@product.image(:original), :alt => @product.name, :id => 'productImage')
-  h3 =@product.description
-  h2 =@product.category.name
-  = link_to 'Add to cart', add_to_cart_url(@product), method: :post
+.ui.four.column.centered.grid
+  .four.wide.column
+    .image.centered
+      = image_tag(@product.image(:original), :alt => @product.name, :id => 'productImage')
 
-= link_to 'Back', index_url
+.ui.raised.segment
+  .header = @product.name
+  p
+    |$
+    =@product.price
+  p =@product.description
+.ui.basic.green.button
+  = link_to 'Back', index_url

@@ -1,8 +1,4 @@
 h1 = @category
-
-.products
-  - @products.each do |prod|
-    == link_to product_url(prod) do
-      .imageDiv data-text=prod.name
-        = image_tag(prod.image(:large), :alt => prod.name)
-= paginate @products
+.ui.four.column.centered.grid
+  = render partial: 'product',
+    collection: @products

@@ -1,0 +1,16 @@
+.four.wide.column
+  .ui.card
+    .image
+      = image_tag(product.image(:large), :alt => product.name)
+    .content
+      =link_to product.name, product_url(product), class: "header"
+      .meta
+        span.date
+          |$
+          =product.price
+    .extra.content
+      .ui.two.buttons
+        .ui.basic.green.button
+          = link_to 'View', product_url(product)
+        .ui.basic.green.button
+          = link_to 'Add to cart', add_to_cart_url(product), method: :post

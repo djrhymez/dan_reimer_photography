@@ -1,27 +1,21 @@
-div
-  ul
-    li  = link_to 'Home', index_url
-    li  = link_to 'Contact Us', contact_url
-    li  = link_to 'About Us', about_url
-    li  = link_to 'New Products', new_url
-    li  = link_to 'Recently Updated Products', recently_updated_url
+.ui.secondary.menu
+  = link_to 'Home', index_url, class: 'item'
+  = link_to 'Contact Us', contact_url, class: 'item'
+  = link_to 'About Us', about_url, class: 'item'
+  = link_to 'New Products', new_url, class: 'item'
+  = link_to 'Recently Updated Products', recently_updated_url, class: 'item'
 
+  .right.menu
     - if user_signed_in?
-      li = link_to current_user.email, edit_user_registration_path
-      li = link_to "Logout", destroy_user_session_path, method: :delete
+      = link_to current_user.email, edit_user_registration_path, class: 'item'
+      = link_to "Logout", destroy_user_session_path, method: :delete, class: 'item'
     - else
-      li = link_to "Sign Up", new_user_registration_path
-      li = link_to "Login", new_user_session_path
-      li = link_to "Shopping Cart", shopping_cart_url
-
-- if @categories != nil
-  div
-    = form_tag search_results_path, method: :get do
-      = text_field_tag :search_keywords
-      = select_tag 'category', options_from_collection_for_select(@categories, "id", "name", "1"), :include_blank => true
-      = submit_tag 'Search'
-
-  div
-    ul
-      - @categories.each do |category|
-        li = link_to category.name, products_by_category_url(category)
+      = link_to "Sign Up", new_user_registration_path, class: 'item'
+      = link_to "Login", new_user_session_path, class: 'item'
+    = link_to "Shopping Cart", shopping_cart_url, class: 'item'
+    - if @categories != nil
+      = form_tag search_results_path, method: :get, class:"item" do
+        .ui.search
+          .ui.icon.input
+            = text_field_tag :search_keywords,"", class: 'prompt'
+            = select_tag 'category', options_from_collection_for_select(@categories, "id", "name", "0"), :include_blank => true, class: 'ui fluid dropdown'

@@ -1,25 +1,27 @@
-h1 Contact
+.ui.two.column.centered.grid
+  .column
+    h1 Contact
 
-h2 Welcome
-p = @contact_data.welcome_message
+    h2 Welcome
+    p = @contact_data.welcome_message
 
-h3 Get in Touch
-ul
-  li = @contact_data.email
-  li = @contact_data.phone
-  - if @contact_data.address != ""
-    li = @contact_data.address
+    h3 Get in Touch
+    ul
+      li = @contact_data.email
+      li = @contact_data.phone
+      - if @contact_data.address != ""
+        li = @contact_data.address
 
-- if (@contact_data.instagram_handle != "") || (@contact_data.facebook_page != "") || (@contact_data.twitter_handle != "")
-     h3 Social Media
-     ul
-      - if @contact_data.instagram_handle != ""
-        li
-          | Instagram:
-          = @contact_data.instagram_handle
-      - if @contact_data.facebook_page != ""
-        li = link_to 'Facebook', @contact_data.facebook_page
-      - if @contact_data.twitter_handle != ""
-        li
-          | Twitter:
-          = @contact_data.twitter_handle
+    - if (@contact_data.instagram_handle != "") || (@contact_data.facebook_page != "") || (@contact_data.twitter_handle != "")
+         h3 Social Media
+         ul
+          - if @contact_data.instagram_handle != ""
+            li
+              | Instagram:
+              = @contact_data.instagram_handle
+          - if @contact_data.facebook_page != ""
+            li = link_to 'Facebook', @contact_data.facebook_page
+          - if @contact_data.twitter_handle != ""
+            li
+              | Twitter:
+              = @contact_data.twitter_handle

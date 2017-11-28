@@ -14,7 +14,7 @@ class ShoppingCartsController < ApplicationController
     session[:shopping_cart][params[:id]] ||= 0
     session[:shopping_cart][params[:id]] += 1
 
-    redirect_to product_path(params[:id])
+    redirect_to home_url
   end
 
   def increase_item_quantity

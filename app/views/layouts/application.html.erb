@@ -7,13 +7,17 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%=  stylesheet_link_tag 'application', 'https://fonts.googleapis.com/css?family=Slabo+27px' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js' %>
+    <%=  stylesheet_link_tag 'application', "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"%>
   </head>
 
   <body>
-    <%= render partial: 'common/menu' %>
-    <div class="alert alert-info"><%= notice %></div>
-    <div class="alert alert-warning"><%= alert %></div>
-
-    <%= yield %>
+    <div class="ui container">
+      <%= render partial: 'common/menu' %>
+      <%= render partial: 'common/sidebar' %>
+      <div class="alert alert-info"><%= notice %></div>
+      <div class="alert alert-warning"><%= alert %></div>
+      <%= yield %>
+    </div>
   </body>
 </html>
