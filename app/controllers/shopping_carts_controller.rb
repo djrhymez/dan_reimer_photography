@@ -46,20 +46,20 @@ class ShoppingCartsController < ApplicationController
   end
 
   def checkout
-    @cart_subtotal = 0;
+    @cart_subtotal = session[:cart_subtotal];
 
-    @products_in_cart = []
+    client = Client.where('user_id = ?', current_user.id).first
+    province = client.province
 
-    session[:shopping_cart].each do |product, quantity|
-      price = Product.find(product).price
-      cart_item = CartItem.new(product, quantity, price)
-      @cart_subtotal += cart_item.quantity * cart_item.price
-      @products_in_cart << cart_item
-    end
+    pst_rate = province.pst
+    gst_rate = province.gst
+    hst_rate = province.hst
 
-    @cart_subtotal = session[:cart_subtotal]
-    session[:cart_subtotal]
+    @pst = number_to_currency(@cart_subtotal * pst_rate)
+    @gst = @cart_subtotal * gst_rate
+    @hst = @cart_subtotal * hst_rate
 
+    @total = @cart_subtotal + @pst + @gst + @hst
   end
 
   def check_customer
