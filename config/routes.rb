@@ -17,6 +17,9 @@ Rails.application.routes.draw do
   post 'shopping_cart/remove_from_cart/:id', to: 'shopping_carts#remove_from_cart', as: 'remove_from_cart', number: /\d+/
   post 'shopping_cart/increase_item_quantity/:id', to:'shopping_carts#increase_item_quantity', as: 'increase_item_quantity', number: /\d+/
   post 'shopping_cart/decrease_item_quantity/:id', to:'shopping_carts#decrease_item_quantity', as: 'decrease_item_quantity', number: /\d+/
+  get 'shopping_cart/checkout', to: 'shopping_carts#checkout', as: 'checkout'
+  get 'shopping_cart/update_address', to: 'shopping_carts#update_address', as: 'update_address'
+  post 'shopping_cart/save_address', to: 'shopping_carts#save_address', as: 'save_address'
 
   root to: 'products#index', as: 'home'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

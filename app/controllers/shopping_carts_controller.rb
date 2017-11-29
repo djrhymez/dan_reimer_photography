@@ -1,4 +1,7 @@
 class ShoppingCartsController < ApplicationController
+  before_action :authenticate_user!, only: [:checkout]
+  before_action :check_customer, only: [:checkout]
+
   def index
     @products_in_cart = Product.find(session[:shopping_cart].keys)
     session[:cart_subtotal] = 0;
@@ -35,12 +38,41 @@ class ShoppingCartsController < ApplicationController
     else
       redirect_to shopping_cart_url
     end
-
   end
 
   def remove_from_cart
     session[:shopping_cart].except!(params[:id])
     redirect_to shopping_cart_url
+  end
+
+  def checkout
+
+  end
+
+  def check_customer
+    client = Client.where('user_id = ?', current_user.id)
+
+    if client.empty?
+      client = Client.new
+      client.user_id = current_user.id
+      client.save
+    end
+
+    client = Client.where('user_id = ?', current_user.id).first
+    session[:client] = client;
+
+    if client.address == nil
+      redirect_to update_address_url
+    else
+      # redirect_to checkout_url
+    end
+  end
+
+  def update_address
+  end
+
+  def save_address
+
   end
 
   class CartItem
@@ -52,6 +84,5 @@ class ShoppingCartsController < ApplicationController
         @name = Product.find(id).name
         @price = price
     end
-
   end
 end

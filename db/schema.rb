@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171113221859) do
+ActiveRecord::Schema.define(version: 20171129143146) do
 
   create_table "about_pages", force: :cascade do |t|
     t.string "header"
@@ -57,11 +57,13 @@ ActiveRecord::Schema.define(version: 20171113221859) do
   end
 
   create_table "clients", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.string "password"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "address"
+    t.integer "user_id"
+    t.integer "province_id"
+    t.index ["province_id"], name: "index_clients_on_province_id"
+    t.index ["user_id"], name: "index_clients_on_user_id"
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -117,6 +119,15 @@ ActiveRecord::Schema.define(version: 20171113221859) do
     t.integer "image_file_size"
     t.datetime "image_updated_at"
     t.index ["category_id"], name: "index_products_on_category_id"
+  end
+
+  create_table "provinces", force: :cascade do |t|
+    t.string "name"
+    t.float "gst"
+    t.float "hst"
+    t.float "pst"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "text_tags", force: :cascade do |t|

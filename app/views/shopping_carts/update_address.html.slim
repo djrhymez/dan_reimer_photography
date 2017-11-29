@@ -1,0 +1,4 @@
+h2 Update address
+= form_tag save_address_url, method: :post, class:"item" do
+  = text_field_tag :client_address,"", class: 'prompt'
+  = submit_tag "Save"
