@@ -5,6 +5,7 @@ ActiveAdmin.register Client do
      f.inputs "Details" do
       f.input :address
       f.input :user_id, :as => :select, :collection => User.all.collect {|user| [user.id, user.id] }
+      f.input :province, :as => :select, :collection => Province.all.collect {|province| [province.id, province.name] }
     end
     f.actions
    end
