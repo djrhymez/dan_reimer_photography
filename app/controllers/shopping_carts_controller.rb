@@ -1,6 +1,6 @@
 class ShoppingCartsController < ApplicationController
-  before_action :authenticate_user!, only: [:checkout]
-  before_action :check_customer, only: [:checkout]
+  before_action :authenticate_user!, only: [:index]
+  before_action :check_customer, only: [:index]
 
   def index
     @products_in_cart = Product.find(session[:shopping_cart].keys)
@@ -16,6 +16,19 @@ class ShoppingCartsController < ApplicationController
     end
 
     @cart_subtotal = session[:cart_subtotal]
+
+    client = Client.where('user_id = ?', current_user.id).first
+    province = client.province
+
+    pst_rate = province.pst
+    gst_rate = province.gst
+    hst_rate = province.hst
+
+    @pst = @cart_subtotal * pst_rate
+    @gst = @cart_subtotal * gst_rate
+    @hst = @cart_subtotal * hst_rate
+
+    @total = @cart_subtotal + @pst + @gst + @hst
   end
 
   def add_to_cart
@@ -46,20 +59,7 @@ class ShoppingCartsController < ApplicationController
   end
 
   def checkout
-    @cart_subtotal = session[:cart_subtotal];
 
-    client = Client.where('user_id = ?', current_user.id).first
-    province = client.province
-
-    pst_rate = province.pst
-    gst_rate = province.gst
-    hst_rate = province.hst
-
-    @pst = number_to_currency(@cart_subtotal * pst_rate)
-    @gst = @cart_subtotal * gst_rate
-    @hst = @cart_subtotal * hst_rate
-
-    @total = @cart_subtotal + @pst + @gst + @hst
   end
 
   def check_customer
@@ -92,7 +92,7 @@ class ShoppingCartsController < ApplicationController
     client.province_id = client_province.to_i
     client.save
 
-    redirect_to checkout_url
+    redirect_to shopping_cart_url
   end
 
   class CartItem

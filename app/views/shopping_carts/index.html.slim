@@ -1,30 +1,49 @@
 h2 Cart
-h3
-  |Subtotal: $
-  = @cart_subtotal
 .ui.four.column.centered.grid
-  - @products_in_cart.each do |product|
-    .four.wide.column
-      .ui.card
-        .content
-          .header
-            = product.name
-          .meta
-            span.date
-              |$
-              =product.price
-          .meta
-            span.date
-              |Quantity:
-              =product.quantity
-        .extra.content
-          .ui.two.buttons
-            .ui.basic.red.button
-              = link_to 'Decrease', decrease_item_quantity_url(product.id), method: :post
-            .ui.basic.green.button
-              = link_to 'Increase', increase_item_quantity_url(product.id), method: :post
-        .extra.content
-          .fluid.ui.button
-            = link_to 'Remove', remove_from_cart_url(product.id), method: :post
-.fluid.ui.button
-  = link_to 'Checkout', checkout_url
+  .eight.wide.column
+    table.ui.celled.table
+      thead
+        tr
+          th Product
+          th Price
+          th Quantity
+          th Edit
+          th Remove
+      - @products_in_cart.each do |product|
+        tr
+          td =product.name
+          td =product.price
+          td =product.quantity
+          td
+            .ui.two.buttons
+              .ui.basic.red.button
+                = link_to 'Decrease', decrease_item_quantity_url(product.id), method: :post
+              .ui.basic.green.button
+                = link_to 'Increase', increase_item_quantity_url(product.id), method: :post
+          td
+            .fluid.ui.button
+              = link_to 'Remove', remove_from_cart_url(product.id), method: :post
+  .four.wide.column
+    h5
+      |Subtotal:
+      =number_to_currency(@cart_subtotal)
+    - if @pst.to_f != 0.0
+      h5
+        |PST:
+        =number_to_currency(@pst)
+
+    - if @gst.to_f != 0.0
+      h5
+        |GST:
+        =number_to_currency(@gst)
+
+    - if @hst.to_f != 0.0
+      h5
+        |HST:
+        =number_to_currency(@hst)
+    h3
+      |Total:
+      =number_to_currency(@total)
+
+    .ui.button
+      = link_to 'Checkout', checkout_url
