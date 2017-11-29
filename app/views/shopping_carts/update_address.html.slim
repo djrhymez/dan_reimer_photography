@@ -1,4 +1,5 @@
 h2 Update address
 = form_tag save_address_url, method: :post, class:"item" do
   = text_field_tag :client_address,"", class: 'prompt'
+  = select_tag :client_province, options_from_collection_for_select(@provinces, "id", "name", "0"), class: 'ui fluid dropdown'
   = submit_tag "Save"

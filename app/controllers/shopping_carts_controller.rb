@@ -46,6 +46,19 @@ class ShoppingCartsController < ApplicationController
   end
 
   def checkout
+    @cart_subtotal = 0;
+
+    @products_in_cart = []
+
+    session[:shopping_cart].each do |product, quantity|
+      price = Product.find(product).price
+      cart_item = CartItem.new(product, quantity, price)
+      @cart_subtotal += cart_item.quantity * cart_item.price
+      @products_in_cart << cart_item
+    end
+
+    @cart_subtotal = session[:cart_subtotal]
+    session[:cart_subtotal]
 
   end
 
@@ -63,16 +76,23 @@ class ShoppingCartsController < ApplicationController
 
     if client.address == nil
       redirect_to update_address_url
-    else
-      # redirect_to checkout_url
     end
   end
 
   def update_address
+    @provinces = Province.all
   end
 
   def save_address
+    client = Client.where('user_id = ?', current_user.id).first
+    client_address = params[:client_address]
+    client_province = params[:client_province]
 
+    client.address = client_address
+    client.province_id = client_province.to_i
+    client.save
+
+    redirect_to checkout_url
   end
 
   class CartItem
