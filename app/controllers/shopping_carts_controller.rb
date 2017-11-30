@@ -18,6 +18,7 @@ class ShoppingCartsController < ApplicationController
     @cart_subtotal = session[:cart_subtotal]
 
     client = Client.where('user_id = ?', current_user.id).first
+    session[:client] = client 
     province = client.province
 
     pst_rate = province.pst
@@ -29,6 +30,7 @@ class ShoppingCartsController < ApplicationController
     @hst = @cart_subtotal * hst_rate
 
     @total = @cart_subtotal + @pst + @gst + @hst
+    session[:total] = @total
   end
 
   def add_to_cart

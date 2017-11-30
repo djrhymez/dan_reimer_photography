@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'charges/new'
+
+  get 'charges/create'
+
   devise_for :users
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
@@ -20,6 +24,7 @@ Rails.application.routes.draw do
   get 'shopping_cart/checkout', to: 'shopping_carts#checkout', as: 'checkout'
   get 'shopping_cart/update_address', to: 'shopping_carts#update_address', as: 'update_address'
   post 'shopping_cart/save_address', to: 'shopping_carts#save_address', as: 'save_address'
+  resources :charges, only: [:new, :create]
 
   root to: 'products#index', as: 'home'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
