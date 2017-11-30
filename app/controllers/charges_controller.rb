@@ -22,7 +22,23 @@ class ChargesController < ApplicationController
     )
 
     if charge.paid && charge.amount == session[:stripe_amount]
+      client = Client.where('user_id = ?', current_user.id).first
+      order = client.orders.build
+      order.status = 'paid'
+      order.save
 
+      products_in_cart = session[:products_in_cart]
+
+      session[:shopping_cart].each do |product, quantity|
+        price = Product.find(product).price
+        line_item = order.line_items.build
+        line_item.product_id = product
+        line_item.price = price
+        line_item.quantity = quantity
+        line_item.save
+      end
+
+      redirect_to home_url
     end
 
     rescue Stripe::CardError => e

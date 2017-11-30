@@ -15,10 +15,10 @@ class ShoppingCartsController < ApplicationController
       @products_in_cart << cart_item
     end
 
+    session[:products_in_cart] = @products_in_cart
     @cart_subtotal = session[:cart_subtotal]
 
     client = Client.where('user_id = ?', current_user.id).first
-    session[:client] = client 
     province = client.province
 
     pst_rate = province.pst
