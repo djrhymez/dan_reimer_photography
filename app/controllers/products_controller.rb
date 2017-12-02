@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   def index
-      @products = Product.order(:updated_at).page(params[:page]).per(10)
+      @products = Product.order(:updated_at).page(params[:page]).per(5)
   end
 
   def product
@@ -8,20 +8,20 @@ class ProductsController < ApplicationController
   end
 
   def new_products
-    @new_products = Product.where("created_at >= ?", 2.days.ago.utc).order(:created_at).page(params[:page]).per(10)
+    @new_products = Product.where("created_at >= ?", 2.days.ago.utc).order(:created_at).page(params[:page]).per(5)
   end
 
   def updated_products
-    @updated_products = Product.where("updated_at >= ?", 2.days.ago.utc).order(:updated_at).page(params[:page]).per(10)
+    @updated_products = Product.where("updated_at >= ?", 2.days.ago.utc).order(:updated_at).page(params[:page]).per(5)
   end
 
   def search_results
     wildcard_keywords = '%' + params[:search_keywords] + '%'
 
     if params[:category].to_i == 0
-      @products = Product.where('name LIKE ? OR description LIKE ?', wildcard_keywords, wildcard_keywords).page(params[:page]).per(10)
+      @products = Product.where('name LIKE ? OR description LIKE ?', wildcard_keywords, wildcard_keywords).page(params[:page]).per(5)
     else
-      @products = Product.where('name LIKE ? OR description LIKE ?', wildcard_keywords, wildcard_keywords).where('category_id = ?', params[:category].to_i).page(params[:page]).per(10)
+      @products = Product.where('name LIKE ? OR description LIKE ?', wildcard_keywords, wildcard_keywords).where('category_id = ?', params[:category].to_i).page(params[:page]).per(5)
     end
   end
 

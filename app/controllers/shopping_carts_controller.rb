@@ -65,18 +65,20 @@ class ShoppingCartsController < ApplicationController
   end
 
   def check_customer
-    client = Client.where('user_id = ?', current_user.id)
+    client = Client.where('user_id = ?', current_user.id).first
 
-    if client.empty?
+    if client == nil
       client = Client.new
       client.user_id = current_user.id
+      default_province = Province.where('id = ?', 3).first
+      client.province = default_province
       client.save
     end
 
     client = Client.where('user_id = ?', current_user.id).first
     session[:client] = client;
 
-    if client.address == nil
+    if client.address.empty?
       redirect_to update_address_url
     end
   end
