@@ -78,7 +78,7 @@ class ShoppingCartsController < ApplicationController
     client = Client.where('user_id = ?', current_user.id).first
     session[:client] = client;
 
-    if client.address.empty?
+    if client.address == nil
       redirect_to update_address_url
     end
   end
